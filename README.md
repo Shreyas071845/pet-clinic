@@ -3,13 +3,13 @@
 A backend project built using Golang, PostgreSQL, JWT authentication, Role-Based Access (Staff/Owner), Logging, and File Upload/Download.
 This project was developed as part of a training assignment to understand API creation, authentication, database handling, and file management.
 
-##📜 Short Description / Purpose
+**📜 Short Description / Purpose**
 
 The Pet Clinic Management System allows pet owners and staff to manage owners, pets, and appointments.
 It includes secure login, validation, structured logging, and database storage.
 Owners can manage only their pets, and staff have full access to all data.
 ---
-##🛠️ Tech Stack
+**🛠️ Tech Stack**
 
 This system uses the following tools and technologies:
 
@@ -29,7 +29,7 @@ This system uses the following tools and technologies:
 
 - SQL – Table creation and sample data
 
-##🌐 Data Flow / Modules
+**🌐 Data Flow / Modules**
 
 - Owners – Add, view, update, delete
 
@@ -51,7 +51,7 @@ This system uses the following tools and technologies:
 
 - Download stored files
 ---
-✨ Features / Highlights
+**✨ Features / Highlights**
 
 JWT-based secure login
 
@@ -68,8 +68,9 @@ File upload & download support
 Database integration with PostgreSQL
 
 Postman collection included
+---
 
-🧩 Business Use Cases / Purpose
+**🧩 Business Use Cases / Purpose**
 
 This system can be used for:
 
@@ -78,8 +79,9 @@ Clinics – Managing pet records, appointments, and medical history
 Owners – Tracking their pets’ visits and medical details
 
 Training purposes – Understanding backend systems, JWT, databases, and file handling
+---
 
-📂 Repository Contents
+**📂 Repository Contents**
 
 auth/ – JWT generation and middleware
 
@@ -100,14 +102,14 @@ uploads/ – File storage (ignored in Git)
 main.go – Main server entry
 
 README.md – Documentation
+---
 
-🚀 Getting Started
+**🚀 Getting Started**
 
 Clone the repository
 
 git clone https://github.com/Shreyas071845/pet-clinic.git
 cd pet-clinic
-
 
 Install dependencies
 
@@ -131,8 +133,8 @@ go run main.go
 
 Server will be available at:
 http://localhost:8080
-
-🔐 Authentication
+---
+**🔐 Authentication**
 Staff Login
 POST /login
 {
@@ -150,21 +152,20 @@ POST /login
 
 Use the returned JWT as:
 Authorization: Bearer <token>
+---
 
-📤 File Upload
+**📤 File Upload**
 POST /api/upload
 
 
 Body → form-data → file: <choose file>
 
-📥 File Download
+**📥 File Download**
 GET /api/download/<filename>
 
-🖼️ Preview (Optional Screenshot Section)
+---
 
-If you want, we can add sample screenshots of Postman, database, or folder structure here.
-
-🧑‍💻 Author
+**🧑‍💻 Author**
 
 Shreyas Bhat
 GitHub: Shreyas071845
