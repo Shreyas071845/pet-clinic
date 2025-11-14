@@ -1,0 +1,616 @@
+{
+	"info": {
+		"_postman_id": "373a9ec3-8587-4714-90da-05bc3bb62506",
+		"name": "pet-clinic",
+		"description": "The **Pet Clinic Management System** is a backend application built using **Golang** that enables pet owners and clinic staff to efficiently manage pet profiles, appointments, and medical documents. This system follows a clean REST API architecture, integrates with a PostgreSQL database, implements JWT-based authentication with role-based access control, provides structured logging, and supports secure file upload/download functionality.EndFragment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49573211",
+		"_collection_link": "https://shreyasbhat7204-9745191.postman.co/workspace/Shreyas-Bhat's-Workspace~724d0a99-7a27-435f-8eff-96301cf2a9b6/collection/49573211-373a9ec3-8587-4714-90da-05bc3bb62506?action=share&source=collection_link&creator=49573211"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login (Staff)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {\r",
+									"    let json = pm.response.json();\r",
+									"    if (json.token) {\r",
+									"        pm.environment.set(\"token\", json.token);\r",
+									"        console.log(\"Token saved to environment\");\r",
+									"    }\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"staff1\",\r\n  \"password\": \"staffpass\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login (Owner)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {\r",
+									"    let json = pm.response.json();\r",
+									"    if (json.token) {\r",
+									"        pm.environment.set(\"token\", json.token);\r",
+									"        console.log(\"Token saved to environment\");\r",
+									"    }\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"owner1\",\r\n  \"password\": \"ownerpass\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "owner",
+			"item": [
+				{
+					"name": "create owner",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NjMxMDQ3NzMsInJvbGUiOiJzdGFmZiIsInVzZXJuYW1lIjoic3RhZmYxIn0.9jofbEQpNo4xXDfVKefWrm7eVV9thTjIb7Wzz4hVOKw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"samarth\",\r\n  \"contact\": \"9874231546\",\r\n  \"email\": \"samarth45@gmail.com\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/owners",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"owners"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all owners",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NjMxMDQ3NzMsInJvbGUiOiJzdGFmZiIsInVzZXJuYW1lIjoic3RhZmYxIn0.9jofbEQpNo4xXDfVKefWrm7eVV9thTjIb7Wzz4hVOKw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/owners",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"owners"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update owner",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NjMxMDQ3NzMsInJvbGUiOiJzdGFmZiIsInVzZXJuYW1lIjoic3RhZmYxIn0.9jofbEQpNo4xXDfVKefWrm7eVV9thTjIb7Wzz4hVOKw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Samarth\",\r\n  \"contact\": \"9876501599\",\r\n  \"email\": \"samarth07@gmail.com\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/owners/5",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"owners",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete owner",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NjMxMDQ3NzMsInJvbGUiOiJzdGFmZiIsInVzZXJuYW1lIjoic3RhZmYxIn0.9jofbEQpNo4xXDfVKefWrm7eVV9thTjIb7Wzz4hVOKw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/owners/5",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"owners",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "pet",
+			"item": [
+				{
+					"name": "add pet",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NjMxMDQ3NzMsInJvbGUiOiJzdGFmZiIsInVzZXJuYW1lIjoic3RhZmYxIn0.9jofbEQpNo4xXDfVKefWrm7eVV9thTjIb7Wzz4hVOKw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Bomb\",\r\n  \"species\": \"Dog\",\r\n  \"breed\": \"Labrador\",\r\n  \"owner_id\": 4,\r\n  \"medical_history\": \"Vaccinated and dewormed\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/pets",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get pets",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NjMxMDQ3NzMsInJvbGUiOiJzdGFmZiIsInVzZXJuYW1lIjoic3RhZmYxIn0.9jofbEQpNo4xXDfVKefWrm7eVV9thTjIb7Wzz4hVOKw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/pets",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update pet",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NjMxMDQ3NzMsInJvbGUiOiJzdGFmZiIsInVzZXJuYW1lIjoic3RhZmYxIn0.9jofbEQpNo4xXDfVKefWrm7eVV9thTjIb7Wzz4hVOKw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"id\": 5,\r\n        \"name\": \"Bomb\",\r\n        \"species\": \"Dog\",\r\n        \"breed\": \"german shepard\",\r\n        \"owner_id\": 4,\r\n        \"medical_history\": \"Vaccinated and dewormed\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/pets/5",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pets",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete pet",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/pets/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pets",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "appointment",
+			"item": [
+				{
+					"name": "book appointmnt",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NjMxMDQ3NzMsInJvbGUiOiJzdGFmZiIsInVzZXJuYW1lIjoic3RhZmYxIn0.9jofbEQpNo4xXDfVKefWrm7eVV9thTjIb7Wzz4hVOKw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"date\": \"2025-11-21\",\r\n  \"time\": \"11:00\",\r\n  \"pet_id\": 5,\r\n  \"reason\": \"Check-up\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/appointments",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"appointments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get appointmnts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NjMxMDQ3NzMsInJvbGUiOiJzdGFmZiIsInVzZXJuYW1lIjoic3RhZmYxIn0.9jofbEQpNo4xXDfVKefWrm7eVV9thTjIb7Wzz4hVOKw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/appointments",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"appointments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update appointment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NjMxMDQ3NzMsInJvbGUiOiJzdGFmZiIsInVzZXJuYW1lIjoic3RhZmYxIn0.9jofbEQpNo4xXDfVKefWrm7eVV9thTjIb7Wzz4hVOKw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"date\": \"2025-11-22\",\r\n  \"time\": \"12:00\",\r\n  \"pet_id\": 4,\r\n  \"reason\": \"Rescheduled\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/appointments/4",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"appointments",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NjMxMDQ3NzMsInJvbGUiOiJzdGFmZiIsInVzZXJuYW1lIjoic3RhZmYxIn0.9jofbEQpNo4xXDfVKefWrm7eVV9thTjIb7Wzz4hVOKw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/appointments/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"appointments",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "files",
+			"item": [
+				{
+					"name": "upload file",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NjMxMDQ3NzMsInJvbGUiOiJzdGFmZiIsInVzZXJuYW1lIjoic3RhZmYxIn0.9jofbEQpNo4xXDfVKefWrm7eVV9thTjIb7Wzz4hVOKw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/bhats/OneDrive/Desktop/Infobell Roadmap/Go lang/Go Assignment- CLI Calculator.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/upload",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "download file",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NjMxMDQ3NzMsInJvbGUiOiJzdGFmZiIsInVzZXJuYW1lIjoic3RhZmYxIn0.9jofbEQpNo4xXDfVKefWrm7eVV9thTjIb7Wzz4hVOKw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/download/Go Assignment- CLI Calculator.pdf",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"download",
+								"Go Assignment- CLI Calculator.pdf"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token }}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

@@ -1,0 +1,8 @@
+.env
+uploads/
+*.log
+*.exe
+*.out
+*.zip
+.DS_Store
+app.log
