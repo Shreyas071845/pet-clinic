@@ -3,52 +3,54 @@
 A backend project built using Golang, PostgreSQL, JWT authentication, Role-Based Access (Staff/Owner), Logging, and File Upload/Download.
 This project was developed as part of a training assignment to understand API creation, authentication, database handling, and file management.
 
-📜 Short Description / Purpose
+##📜 Short Description / Purpose
 
 The Pet Clinic Management System allows pet owners and staff to manage owners, pets, and appointments.
 It includes secure login, validation, structured logging, and database storage.
 Owners can manage only their pets, and staff have full access to all data.
-
-🛠️ Tech Stack
+---
+##🛠️ Tech Stack
 
 This system uses the following tools and technologies:
 
-🐹 Golang (net/http, gorilla/mux) – Backend API development
+- Golang (net/http, gorilla/mux) – Backend API development
 
-🐘 PostgreSQL – Database for storing owners, pets, and appointments
+- PostgreSQL – Database for storing owners, pets, and appointments
 
-🔐 JWT (HS256) – Authentication and authorization
+- JWT (HS256) – Authentication and authorization
 
-📁 File Upload/Download – For medical reports (PDFs/images)
+- File Upload/Download – For medical reports (PDFs/images)
 
-📝 Logrus + Lumberjack – Structured logging with log rotation
+- Logrus + Lumberjack – Structured logging with log rotation
 
-🧪 Postman – API testing
+- Postman – API testing
 
-📄 SQL – Table creation and sample data
+---
 
-🌐 Data Flow / Modules
+- SQL – Table creation and sample data
 
-Owners – Add, view, update, delete
+##🌐 Data Flow / Modules
 
-Pets – Add, view, update, delete
+- Owners – Add, view, update, delete
 
-Appointments – Book, view, update, cancel
+- Pets – Add, view, update, delete
 
-Authentication – JSON or Basic login → JWT token
+- Appointments – Book, view, update, cancel
 
-Role-Based Access
+- Authentication – JSON or Basic login → JWT token
 
-Owner → only own pets
+**Role-Based Access**
 
-Staff → all pets
+- Owner → only own pets
 
-File Management
+- Staff → all pets
 
-Upload medical files
+- File Management
 
-Download stored files
+- Upload medical files
 
+- Download stored files
+---
 ✨ Features / Highlights
 
 JWT-based secure login
