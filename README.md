@@ -1,257 +1,171 @@
-🐾 Pet Clinic Management System (Go + PostgreSQL)
+#🐾 Pet Clinic Management System – Go + PostgreSQL
 
-A complete backend project built using Golang, PostgreSQL, JWT Authentication, Role-Based Access(Staff / Owner), Structured Logging, File Upload & Download, and Postman Collection.
+A backend project built using Golang, PostgreSQL, JWT authentication, Role-Based Access (Staff/Owner), Logging, and File Upload/Download.
+This project was developed as part of a training assignment to understand API creation, authentication, database handling, and file management.
 
-This project fulfills the full requirements of your To-Do Pet Clinic Assignment.
+**📜 Short Description / Purpose**
 
-🚀 Features
-✅ Owners Module
+The Pet Clinic Management System allows pet owners and staff to manage owners, pets, and appointments.
+It includes secure login, validation, structured logging, and database storage.
+Owners can manage only their pets, and staff have full access to all data.
+---
+**🛠️ Tech Stack**
 
-Create Owner
+This system uses the following tools and technologies:
 
-Get All Owners
+- Golang (net/http, gorilla/mux) – Backend API development
 
-Update Owner
+- PostgreSQL – Database for storing owners, pets, and appointments
 
-Delete Owner
+- JWT (HS256) – Authentication and authorization
 
-Validation (name, email required)
+- File Upload/Download – For medical reports (PDFs/images)
 
-Logging for all operations
+- Logrus + Lumberjack – Structured logging with log rotation
 
-✅ Pets Module
+- Postman – API testing
 
-Add Pet
+---
 
-Get Pets
+- SQL – Table creation and sample data
 
-Update Pet
+**🌐 Data Flow / Modules**
 
-Delete Pet
+- Owners – Add, view, update, delete
 
-Owners can only manage their own pets
+- Pets – Add, view, update, delete
 
-Staff can manage all pets
+- Appointments – Book, view, update, cancel
 
-✅ Appointments
+- Authentication – JSON or Basic login → JWT token
 
-Book Appointment
+**Role-Based Access**
 
-View Appointments
+- Owner → only own pets
 
-Update Appointment
+- Staff → all pets
 
-Cancel Appointment
+- File Management
 
-✅ Authentication (JWT)
+- Upload medical files
 
-Two roles:
+- Download stored files
+---
+**✨ Features / Highlights**
 
-Staff → Full access
+JWT-based secure login
 
-Owner → Limited to own pets
+Role-based authorization (Owner/Staff)
 
-Login using:
+Structured logging (INFO, DEBUG, WARN, ERROR)
 
-Basic Auth
+CRUD operations for owners, pets, appointments
 
-OR JSON Body
+Input validation for important fields
 
-JWT Middleware protects all /api/... routes
+File upload & download support
 
-✅ Logging + Error Handling
+Database integration with PostgreSQL
 
-Using Logrus + Lumberjack:
+Postman collection included
+---
 
-INFO logs
+**🧩 Business Use Cases / Purpose**
 
-DEBUG logs
+This system can be used for:
 
-WARN logs
+Clinics – Managing pet records, appointments, and medical history
 
-ERROR logs
+Owners – Tracking their pets’ visits and medical details
 
-Log rotation
+Training purposes – Understanding backend systems, JWT, databases, and file handling
+---
 
-All errors return clean JSON responses
+**📂 Repository Contents**
 
-✅ File Management
+auth/ – JWT generation and middleware
 
-Upload medical records (PDF / images)
+handlers/ – API endpoints for owners, pets, appointments, files
 
-Download files securely
+db/ – PostgreSQL connection
 
-Dedicated /uploads folder
+models/ – Data models
 
-MIME-type handled
+utils/ – Logger setup
 
-Logging for upload/download events
+database.sql – SQL tables + sample data
 
+postman_collection.json – Ready-to-use Postman import
 
-🗂 Database Design (PostgreSQL)
+uploads/ – File storage (ignored in Git)
 
-owners
+main.go – Main server entry
 
-id SERIAL PRIMARY KEY
-name VARCHAR
-contact VARCHAR
-email VARCHAR UNIQUE
+README.md – Documentation
+---
 
+**🚀 Getting Started**
 
-pets
+Clone the repository
 
-id SERIAL PRIMARY KEY
-name VARCHAR
-species VARCHAR
-breed VARCHAR
-owner_id INT REFERENCES owners(id)
-medical_history TEXT
-
-
-appointments
-
-id SERIAL PRIMARY KEY
-date DATE
-time TIME
-pet_id INT REFERENCES pets(id)
-reason TEXT
-
-
-Sample data included in database.sql.
-
-
-🛠 Tech Stack
-
-Go 1.21+
-
-PostgreSQL
-
-gorilla/mux
-
-JWT (golang-jwt v5)
-
-Logrus
-
-Lumberjack (log rotation)
-
-Postman (API testing)
-
-
-📦 Project Structure
-pet-clinic/
-│── auth/               (JWT + middleware)
-│── handlers/           (All API handlers)
-│── models/             (Struct models)
-│── utils/              (Logger setup)
-│── uploads/            (Uploaded files)
-│── main.go
-│── go.mod
-│── database.sql
-│── postman_collection.json
-│── README.md
-│── .gitignore
-
-
-🔧 Setup Instructions
-1️⃣ Clone the Repo
 git clone https://github.com/Shreyas071845/pet-clinic.git
 cd pet-clinic
 
-2️⃣ Install Dependencies
+Install dependencies
+
 go mod tidy
 
-3️⃣ Create .env File
 
-Create a file named .env:
+Create .env file
 
 JWT_SECRET=mysecretkey
 
-4️⃣ Import Database
 
-Run PostgreSQL command:
+Import database
 
 psql -U postgres -d petclinic -f database.sql
 
-5️⃣ Run the Server
+
+Run server
+
 go run main.go
 
 
-Server runs at:
-
+Server will be available at:
 http://localhost:8080
-
-📬 Postman Collection
-
-A ready-to-use Postman collection is included:
-
-postman_collection.json
-
-
-Import it in Postman and start testing immediately.
-
-🔐 How Authentication Works
+---
+**🔐 Authentication**
 Staff Login
-
-POST → /login
-
+POST /login
 {
   "username": "staff1",
   "password": "staffpass"
 }
 
 Owner Login
-
-POST → /login
-
+POST /login
 {
   "username": "owner1",
   "password": "ownerpass"
 }
 
 
-The response will give a JWT token.
+Use the returned JWT as:
+Authorization: Bearer <token>
+---
 
-Use Token for All Protected Routes
-
-In Postman → Authorization:
-
-Bearer Token
-{{token}}
-
-
-Token is auto-saved via Post-response script.
-
-📤 File Upload
-
-Endpoint:
-
+**📤 File Upload**
 POST /api/upload
 
 
-Body → form-data:
+Body → form-data → file: <choose file>
 
-file: <select your PDF/image>
-
-📥 File Download
+**📥 File Download**
 GET /api/download/<filename>
 
+---
 
-Example:
-
-GET http://localhost:8080/api/download/test.pdf
-
-🧑‍💻 Author
+**🧑‍💻 Author**
 
 Shreyas Bhat
 GitHub: Shreyas071845
-
-🎉 Final Notes
-
-This project is complete with:
-✔ Authentication
-✔ CRUD operations
-✔ Logging
-✔ File management
-✔ Role-based access
-✔ Postman support
-✔ Clean structured Go code
