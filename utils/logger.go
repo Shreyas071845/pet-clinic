@@ -38,5 +38,4 @@ func InitLogger() {
 	Log.Debug("Logger initialized in DEBUG mode (verbose output)")
 	Log.Info("Logger initialized successfully")
 	Log.Warn("Logger rotation is active")
-	Log.Error("Test ERROR log (for verification only)")
 }

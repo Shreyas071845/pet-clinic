@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 
 	"pet-clinic/auth"
@@ -20,6 +19,12 @@ func main() {
 	db.Connect()
 
 	r := mux.NewRouter()
+
+	// Homepage route
+	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		w.Write([]byte(`{"message": "Pet Clinic API is running!"}`))
+	}).Methods("GET")
 
 	// Public route for login
 	r.HandleFunc("/login", handlers.Login).Methods("POST")
@@ -53,5 +58,10 @@ func main() {
 	fmt.Println("Server running at http://localhost:8080")
 	utils.Log.Info("Server running at :8080")
 
-	log.Fatal(http.ListenAndServe(":8080", r))
+	if err := http.ListenAndServe(":8080", r); err != nil {
+		utils.Log.WithError(err).Error("Server stopped unexpectedly")
+	}
+
+	select {}
+
 }

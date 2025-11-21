@@ -1,15 +1,3 @@
-select * from owners;
-
-SELECT * FROM pets;
-
-SELECT * FROM appointments;
-
-
--- Drop existing tables first (if needed)
-DROP TABLE IF EXISTS appointments CASCADE;
-DROP TABLE IF EXISTS pets CASCADE;
-DROP TABLE IF EXISTS owners CASCADE;
-
 -- Owners table
 CREATE TABLE owners (
     id SERIAL PRIMARY KEY,
